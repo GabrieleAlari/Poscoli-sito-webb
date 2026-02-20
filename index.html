@@ -18,7 +18,91 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
-    <!-- Alpine.js per la reattività -->
+    <!-- JavaScript Logic (Definita prima di Alpine) -->
+    <script>
+        function pascoliApp() {
+            return {
+                activeStanza: null,
+                selectedEvent: null,
+                timelineEvents: [
+                    {
+                        year: "1855",
+                        title: "La Nascita",
+                        description: "Nasce il 31 dicembre a San Mauro di Romagna, quarto di dieci figli in una famiglia benestante."
+                    },
+                    {
+                        year: "1867",
+                        title: "Il Trauma",
+                        description: "Il 10 agosto viene ucciso il padre Ruggero. È l'inizio della disgregazione del 'nido' familiare."
+                    },
+                    {
+                        year: "1873",
+                        title: "Bologna",
+                        description: "Vince una borsa di studio all'Università di Bologna, dove diventa allievo di Giosuè Carducci."
+                    },
+                    {
+                        year: "1891",
+                        title: "Myricae",
+                        description: "Pubblica la prima edizione della sua raccolta più celebre, dedicata alle 'piccole cose'."
+                    },
+                    {
+                        year: "1897",
+                        title: "Il Fanciullino",
+                        description: "Esce sulla rivista 'Il Marzocco' il saggio che definisce la sua intera poetica."
+                    },
+                    {
+                        year: "1912",
+                        title: "Il Commiato",
+                        description: "Muore a Bologna il 6 aprile, lasciando un'eredità letteraria che segnerà il Novecento."
+                    }
+                ],
+                poemStanzas: [
+                    {
+                        text: "E s'aprono i fiori notturni,\nnell'ora che penso a' miei cari.\nSono apparse in mezzo ai viburni\nle farfalle crepuscolari.",
+                        explanation: "L'apertura dei fiori (il gelsomino) coincide con il ricordo dei morti. Le farfalle crepuscolari (le sfingi) introducono un'atmosfera di mistero e morte.",
+                        side: "left"
+                    },
+                    {
+                        text: "Da un pezzo si tacquero i gridi:\nlà sola una casa bisbiglia.\nSotto l'ali dormono i nidi,\ncome gli occhi sotto le ciglia.",
+                        explanation: "Il silenzio della natura si contrappone al 'bisbiglio' umano nella casa. La similitudine nidi/occhi suggerisce protezione e intimità domestica.",
+                        side: "right"
+                    },
+                    {
+                        text: "Dai calici aperti si esala\nl'odore di fragole rosse.\nSplende un lume là nella sala.\nNasce l'erba sopra le fosse.",
+                        explanation: "L'odore di fragole rosse è una sinestesia che allude all'erotismo. Il lume nella sala indica la veglia nuziale, mentre l'erba sulle fosse richiama il legame inscindibile con la morte.",
+                        side: "left"
+                    },
+                    {
+                        text: "Un'ape tardiva sussurra\ntrovando già prese le celle.\nLa Chioccetta per l'aia azzurra\nva col suo pigolio di stelle.",
+                        explanation: "L'ape tardiva è esclusa dal nido, come il poeta. La Chioccetta (le Pleiadi) è vista con occhi fanciulleschi come una chioccia in un'aia celeste.",
+                        side: "right"
+                    },
+                    {
+                        text: "Per tutta la notte s'esala\nl'odore che passa col vento.\nPassa il lume su per la scala;\nbrilla al primo piano: s'è spento...",
+                        explanation: "Il lume che sale e si spegne indica il culmine dell'atto sessuale/nuziale, visto dal poeta con un senso di esclusione e turbamento.",
+                        side: "left"
+                    },
+                    {
+                        text: "È l'alba: si chiudono i petali\nun poco gualciti; si cova,\ndentro l'urna molle e segreta,\nnon so che felicità nuova.",
+                        explanation: "L'alba segna la fine del rito. I petali 'gualciti' alludono alla perdita della verginità. L'urna (l'ovario del fiore) custodisce il segreto della nuova vita (il concepimento).",
+                        side: "right"
+                    }
+                ],
+                init() {
+                    lucide.createIcons();
+                    if (typeof AOS !== 'undefined') {
+                        AOS.init({
+                            duration: 1000,
+                            once: true,
+                            offset: 100
+                        });
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js (Caricato dopo la definizione delle funzioni) -->
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <script>
@@ -43,28 +127,59 @@
     </script>
 
     <style>
-        .glass {
-            background: rgba(245, 242, 237, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        :root {
+            --sage: #7D8C71;
+            --cream: #F5F2ED;
+            --terracotta: #B36A5E;
+            --earth: #4A3728;
+            --moss: #3E4C33;
         }
-        
+
         body {
-            background-color: #F5F2ED;
-            color: #4A3728;
+            background-color: var(--cream);
+            color: var(--earth);
+            font-family: 'Cormorant Garamond', serif;
+            scroll-behavior: smooth;
             overflow-x: hidden;
         }
 
-        .timeline-dot::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: inherit;
-            background: currentColor;
-            opacity: 0.1;
-            z-index: -1;
-            transform: scale(1.2);
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-sans { font-family: 'Inter', sans-serif; }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .text-terracotta { color: var(--terracotta); }
+        .bg-terracotta { background-color: var(--terracotta); }
+        .text-moss { color: var(--moss); }
+        .bg-moss { background-color: var(--moss); }
+        .bg-sage { background-color: var(--sage); }
+        .border-moss { border-color: var(--moss); }
+
+        .timeline-dot:hover {
+            transform: scale(1.2) rotate(5deg);
+            box-shadow: 0 0 20px rgba(125, 140, 113, 0.4);
+        }
+
+        [x-cloak] { display: none !important; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--cream);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--moss);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--terracotta);
         }
 
         pre {
@@ -73,7 +188,7 @@
         }
     </style>
 </head>
-<body x-data="pascoliApp()" x-init="init()">
+<body x-data="pascoliApp()">
 
     <!-- Sfondo decorativo fisso -->
     <div class="fixed inset-0 pointer-events-none z-0">
@@ -82,7 +197,7 @@
     </div>
 
     <!-- Navigazione -->
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 flex gap-4 md:gap-8 items-center glass rounded-full shadow-xl border border-white/40" data-aos="fade-down">
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 flex gap-4 md:gap-8 items-center glass rounded-full shadow-xl" data-aos="fade-down">
         <span class="font-display text-lg md:text-xl font-black text-moss border-r border-[#3E4C3333] pr-4 md:pr-6 mr-1 md:mr-2">Pascoli</span>
         <div class="flex gap-4 md:gap-6 text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-sans font-bold">
             <a href="#vita" class="hover:text-terracotta transition-colors">Vita</a>
@@ -125,7 +240,8 @@
     <section id="vita" class="py-24 px-6 md:px-12 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         <div class="relative" data-aos="fade-right">
             <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border-8 border-white -rotate-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Giovanni_Pascoli_1.jpg/800px-Giovanni_Pascoli_1.jpg" alt="Giovanni Pascoli in età matura" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000">
+                <!-- Immagine aggiornata come richiesto -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Giovanni_Pascoli_01.jpg" alt="Giovanni Pascoli seduto" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000">
             </div>
             <div class="absolute -bottom-6 -right-6 w-24 h-24 md:w-32 md:h-32 bg-terracotta rounded-full flex items-center justify-center text-[#F5F2ED] font-display text-3xl md:text-4xl shadow-lg">
                 1855
@@ -141,7 +257,7 @@
             <div class="space-y-6 text-lg text-[#4A3728e6] leading-relaxed">
                 <p>Nato a San Mauro di Romagna, la sua vita fu sconvolta il <strong>10 agosto 1867</strong> dall'assassinio del padre Ruggero, un evento che distrusse per sempre l'idillio familiare.</p>
                 <p>Seguirono anni di povertà e ulteriori lutti, che alimentarono in lui l'ossessione per il <strong>"nido"</strong>: la famiglia come unico rifugio sicuro contro un mondo esterno ostile e violento.</p>
-                <p>Nonostante il dolore, riuscì a eccellere negli studi, laureandosi a Bologna sotto la guida di Giosuè Carducci, di cui prenderà il posto alla cattedra di Letteratura Italiana.</p>
+                <p>Nonostante il dolore, riuscì a eccellere negli studi, laureandosi a Bologna sotto la guida di Giosuè Carducci.</p>
             </div>
         </div>
     </section>
@@ -155,7 +271,6 @@
             </div>
 
             <div class="relative min-h-[400px]">
-                <!-- Linea della timeline (Desktop) -->
                 <div class="hidden md:block absolute top-24 left-0 w-full h-px bg-[#3E4C331a]"></div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-6 gap-8 md:gap-4 relative z-10">
@@ -171,6 +286,7 @@
                                 <span class="text-[9px] font-sans font-black text-terracotta uppercase tracking-widest" x-text="event.year"></span>
                                 
                                 <div x-show="selectedEvent === index" 
+                                     x-cloak
                                      x-transition:enter="transition ease-out duration-300"
                                      x-transition:enter-start="opacity-0 translate-y-4"
                                      x-transition:enter-end="opacity-100 translate-y-0"
@@ -195,7 +311,7 @@
             </div>
             <h2 class="text-4xl md:text-5xl mb-6 font-display">Il mistero e l'ignoto</h2>
             <p class="text-lg md:text-xl text-[#4A3728cc] leading-relaxed">
-                Per Pascoli, la realtà non è spiegabile razionalmente. Sotto la superficie delle cose si cela un <strong>mistero profondo</strong>: il mondo è una "foresta di simboli" inquietante e affascinante.
+                Per Pascoli, la realtà non è spiegabile razionalmente. Sotto la superficie delle cose si cela un <strong>mistero profondo</strong>.
             </p>
         </div>
 
@@ -203,17 +319,17 @@
             <div class="bg-white p-8 rounded-3xl shadow-sm border border-[#7D8C711a] hover:-translate-y-2 transition-transform duration-500">
                 <div class="text-terracotta mb-6"><i data-lucide="sparkles" class="w-8 h-8"></i></div>
                 <h3 class="text-2xl mb-4 font-display">Oltre il Visibile</h3>
-                <p class="text-[#4A3728b3] leading-relaxed">La scienza fallisce nel dare risposte ultime. Solo l'intuizione del poeta può squarciare il velo del mistero.</p>
+                <p class="text-[#4A3728b3] leading-relaxed">La scienza fallisce nel dare risposte ultime. Solo l'intuizione del poeta può squarciare il velo.</p>
             </div>
             <div class="bg-white p-8 rounded-3xl shadow-sm border border-[#7D8C711a] hover:-translate-y-2 transition-transform duration-500">
                 <div class="text-terracotta mb-6"><i data-lucide="leaf" class="w-8 h-8"></i></div>
                 <h3 class="text-2xl mb-4 font-display">Simbolismo</h3>
-                <p class="text-[#4A3728b3] leading-relaxed">Le piccole cose (myricae) diventano simboli di verità universali o proiezioni di traumi interiori.</p>
+                <p class="text-[#4A3728b3] leading-relaxed">Le piccole cose diventano simboli di verità universali o proiezioni di traumi interiori.</p>
             </div>
             <div class="bg-white p-8 rounded-3xl shadow-sm border border-[#7D8C711a] hover:-translate-y-2 transition-transform duration-500">
                 <div class="text-terracotta mb-6"><i data-lucide="home" class="w-8 h-8"></i></div>
                 <h3 class="text-2xl mb-4 font-display">Il Nido Sacro</h3>
-                <p class="text-[#4A3728b3] leading-relaxed">Il nido è il centro affettivo, unico spazio dove l'ignoto non è minaccioso, ma protetto dal calore dei cari.</p>
+                <p class="text-[#4A3728b3] leading-relaxed">Il nido è il centro affettivo, unico spazio dove l'ignoto non è minaccioso.</p>
             </div>
         </div>
     </section>
@@ -242,17 +358,17 @@
             <div class="grid md:grid-cols-2 gap-12">
                 <div class="space-y-8" data-aos="fade-right">
                     <div class="border-l-4 border-terracotta pl-6">
-                        <h4 class="text-2xl mb-2 font-display">Stupore e Meraviglia</h4>
-                        <p class="text-[#F5F2EDb3]">Il poeta non inventa, ma scopre. Trova la poesia nelle piccole cose quotidiane che gli altri ignorano.</p>
+                        <h4 class="text-2xl mb-2 font-display">Stupore</h4>
+                        <p class="text-[#F5F2EDb3]">Il poeta non inventa, ma scopre. Trova la poesia nelle piccole cose quotidiane.</p>
                     </div>
                     <div class="border-l-4 border-sage pl-6">
-                        <h4 class="text-2xl mb-2 font-display">Linguaggio Pre-grammaticale</h4>
-                        <p class="text-[#F5F2EDb3]">Uso di onomatopee (il verso degli uccelli), termini precisi e una sintassi frantumata e suggestiva.</p>
+                        <h4 class="text-2xl mb-2 font-display">Linguaggio</h4>
+                        <p class="text-[#F5F2EDb3]">Uso di onomatopee, termini precisi e una sintassi frantumata e suggestiva.</p>
                     </div>
                 </div>
                 <div class="bg-white/5 p-8 rounded-3xl backdrop-blur-sm border border-white/10 flex items-center" data-aos="fade-left">
                     <p class="text-lg leading-relaxed italic opacity-80">
-                        "Il poeta è colui che sa vedere il grande nel piccolo e il piccolo nel grande. Non ha bisogno di argomenti elevati per essere sublime."
+                        "Il poeta è colui che sa vedere il grande nel piccolo e il piccolo nel grande."
                     </p>
                 </div>
             </div>
@@ -268,17 +384,16 @@
             </div>
             <h2 class="text-5xl md:text-6xl mb-6 font-display">Il Gelsomino Notturno</h2>
             <p class="text-lg md:text-xl text-[#4A3728b3] max-w-2xl mx-auto italic">
-                Un capolavoro di simbolismo e allusioni.
-                <span class="text-xs font-sans font-bold text-moss mt-4 block uppercase tracking-tighter not-italic">Clicca sulle strofe per scoprire l'analisi</span>
+                Clicca sulle strofe per scoprire l'analisi.
             </p>
         </div>
 
         <div class="relative max-w-5xl mx-auto space-y-12">
             <template x-for="(stanza, index) in poemStanzas" :key="index">
                 <div class="flex flex-col md:flex-row items-center gap-6 group">
-                    <!-- Analisi Desktop (Sinistra) -->
                     <div class="hidden md:block w-1/3">
                         <div x-show="activeStanza === index && stanza.side === 'left'" 
+                             x-cloak
                              x-transition:enter="transition duration-500"
                              x-transition:enter-start="opacity-0 -translate-x-4"
                              class="bg-[#7D8C711a] p-6 rounded-2xl border-l-4 border-sage text-sm italic leading-relaxed">
@@ -286,7 +401,6 @@
                         </div>
                     </div>
 
-                    <!-- Strofa (Centro) -->
                     <div class="w-full md:w-1/3 text-center">
                         <div @click="activeStanza = (activeStanza === index ? null : index)"
                              :class="activeStanza === index ? 'bg-white shadow-2xl ring-2 ring-terracotta/20 scale-105' : 'hover:bg-white/50'" 
@@ -295,14 +409,13 @@
                         </div>
                     </div>
 
-                    <!-- Analisi Mobile -->
-                    <div class="md:hidden w-full" x-show="activeStanza === index" x-transition>
+                    <div class="md:hidden w-full" x-show="activeStanza === index" x-cloak x-transition>
                         <div class="bg-[#7D8C711a] p-6 rounded-xl text-sm italic border-l-4 border-sage" x-text="stanza.explanation"></div>
                     </div>
 
-                    <!-- Analisi Desktop (Destra) -->
                     <div class="hidden md:block w-1/3">
                         <div x-show="activeStanza === index && stanza.side === 'right'" 
+                             x-cloak
                              x-transition:enter="transition duration-500"
                              x-transition:enter-start="opacity-0 translate-x-4"
                              class="bg-[#B36A5E1a] p-6 rounded-2xl border-r-4 border-terracotta text-sm italic leading-relaxed text-right">
@@ -321,88 +434,8 @@
                 <i data-lucide="feather" class="w-12 h-12 text-terracotta mx-auto"></i>
             </div>
             <h2 class="text-3xl md:text-4xl mb-8 font-display italic">"Il mondo è piccolo per chi lo guarda con amore."</h2>
-            <div class="w-24 h-px bg-terracotta/40 mx-auto mb-8"></div>
             <p class="font-sans text-[10px] uppercase tracking-[0.5em] opacity-40">Progetto Didattico su Giovanni Pascoli &copy; 2024</p>
         </div>
     </footer>
-
-    <script>
-        function pascoliApp() {
-            return {
-                selectedEvent: null,
-                activeStanza: null,
-                
-                timelineEvents: [
-                    {
-                        year: "1855",
-                        title: "Nascita",
-                        description: "Nasce a San Mauro di Romagna il 31 dicembre, quarto di dieci figli di una famiglia benestante."
-                    },
-                    {
-                        year: "1867",
-                        title: "Il Trauma",
-                        description: "Il 10 agosto il padre viene ucciso. Pascoli dedicherà a questo evento la celebre poesia 'X Agosto'."
-                    },
-                    {
-                        year: "1882",
-                        title: "Laurea",
-                        description: "Si laurea a Bologna con Giosuè Carducci, diventando uno studioso raffinato di latino e greco."
-                    },
-                    {
-                        year: "1891",
-                        title: "Myricae",
-                        description: "Esce la prima raccolta. Il titolo significa 'tamerici', piante umili che celebrano la vita di campagna."
-                    },
-                    {
-                        year: "1897",
-                        title: "Il Saggio",
-                        description: "Pubblica 'Il Fanciullino', definendo la poesia come la capacità di stupirsi tipica dell'infanzia."
-                    },
-                    {
-                        year: "1912",
-                        title: "Morte",
-                        description: "Si spegne a Bologna. Il suo nido di Castelvecchio rimane oggi un museo dedicato alla sua memoria."
-                    }
-                ],
-
-                poemStanzas: [
-                    {
-                        text: "E s'aprono i fiori notturni,\nnell'ora che penso a' miei cari.\nSono apparse in mezzo ai viburni\nle farfalle crepuscolari.",
-                        explanation: "Il gelsomino si apre al tramonto. Il poeta associa subito la natura al pensiero dei suoi morti, creando un legame tra vita e aldilà.",
-                        side: "left"
-                    },
-                    {
-                        text: "Da un pezzo si tacquero i gridi:\nlà sola una casa bisbiglia.\nSotto l'ali dormono i nidi,\ncome gli occhi sotto le ciglia.",
-                        explanation: "Il 'bisbiglio' della casa allude alla vita familiare e sessuale che prosegue, mentre il poeta osserva da fuori, escluso dal 'nido'.",
-                        side: "right"
-                    },
-                    {
-                        text: "Dai calici aperti si esala\nl'odore di fragole rosse.\nSplende un lume là nella sala.\nNasce l'erba sopra le fosse.",
-                        explanation: "La famosa sinestesia dell'odore di fragole rosse richiama l'erotismo. Il contrasto tra la luce in casa e l'erba sulle tombe è struggente.",
-                        side: "left"
-                    },
-                    {
-                        text: "Un'ape tardiva sussurra\ntrovando già prese le celle.\nLa Chioccetta per l'aia azzurra\nva col suo pigolio di stelle.",
-                        explanation: "L'ape esclusa è il poeta stesso. La Chioccetta (le Pleiadi) viene descritta con un termine contadino, rendendo il cielo domestico.",
-                        side: "right"
-                    }
-                ],
-
-                init() {
-                    // Inizializza le icone
-                    lucide.createIcons();
-                    
-                    // Inizializza AOS
-                    AOS.init({
-                        duration: 1000,
-                        once: true,
-                        offset: 50
-                    });
-
-                    console.log("Sito di Pascoli inizializzato correttamente.");
-                }
-            }
-        }
-    </script>
 </body>
 </html>
