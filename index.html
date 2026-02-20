@@ -2,116 +2,31 @@
 <html lang="it" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Giovanni Pascoli: Il Poeta del Fanciullino</title>
     
-    <!-- Tailwind CSS per il layout responsivo -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font eleganti da Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Icone Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- Animazioni AOS (Animate On Scroll) -->
+    <!-- Animazioni AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- JavaScript Logic (Definita prima di Alpine) -->
-    <script>
-        function pascoliApp() {
-            return {
-                activeStanza: null,
-                selectedEvent: null,
-                timelineEvents: [
-                    {
-                        year: "1855",
-                        title: "La Nascita",
-                        description: "Nasce il 31 dicembre a San Mauro di Romagna, quarto di dieci figli in una famiglia benestante."
-                    },
-                    {
-                        year: "1867",
-                        title: "Il Trauma",
-                        description: "Il 10 agosto viene ucciso il padre Ruggero. È l'inizio della disgregazione del 'nido' familiare."
-                    },
-                    {
-                        year: "1873",
-                        title: "Bologna",
-                        description: "Vince una borsa di studio all'Università di Bologna, dove diventa allievo di Giosuè Carducci."
-                    },
-                    {
-                        year: "1891",
-                        title: "Myricae",
-                        description: "Pubblica la prima edizione della sua raccolta più celebre, dedicata alle 'piccole cose'."
-                    },
-                    {
-                        year: "1897",
-                        title: "Il Fanciullino",
-                        description: "Esce sulla rivista 'Il Marzocco' il saggio che definisce la sua intera poetica."
-                    },
-                    {
-                        year: "1912",
-                        title: "Il Commiato",
-                        description: "Muore a Bologna il 6 aprile, lasciando un'eredità letteraria che segnerà il Novecento."
-                    }
-                ],
-                poemStanzas: [
-                    {
-                        text: "E s'aprono i fiori notturni,\nnell'ora che penso a' miei cari.\nSono apparse in mezzo ai viburni\nle farfalle crepuscolari.",
-                        explanation: "L'apertura dei fiori (il gelsomino) coincide con il ricordo dei morti. Le farfalle crepuscolari (le sfingi) introducono un'atmosfera di mistero e morte.",
-                        side: "left"
-                    },
-                    {
-                        text: "Da un pezzo si tacquero i gridi:\nlà sola una casa bisbiglia.\nSotto l'ali dormono i nidi,\ncome gli occhi sotto le ciglia.",
-                        explanation: "Il silenzio della natura si contrappone al 'bisbiglio' umano nella casa. La similitudine nidi/occhi suggerisce protezione e intimità domestica.",
-                        side: "right"
-                    },
-                    {
-                        text: "Dai calici aperti si esala\nl'odore di fragole rosse.\nSplende un lume là nella sala.\nNasce l'erba sopra le fosse.",
-                        explanation: "L'odore di fragole rosse è una sinestesia che allude all'erotismo. Il lume nella sala indica la veglia nuziale, mentre l'erba sulle fosse richiama il legame inscindibile con la morte.",
-                        side: "left"
-                    },
-                    {
-                        text: "Un'ape tardiva sussurra\ntrovando già prese le stelle.\nLa Chioccetta per l'aia azzurra\nva col suo pigolio di stelle.",
-                        explanation: "L'ape tardiva è esclusa dal nido, come il poeta. La Chioccetta (le Pleiadi) è vista con occhi fanciulleschi come una chioccia in un'aia celeste.",
-                        side: "right"
-                    },
-                    {
-                        text: "Per tutta la notte s'esala\nl'odore che passa col vento.\nPassa il lume su per la scala;\nbrilla al primo piano: s'è spento...",
-                        explanation: "Il lume che sale e si spegne indica il culmine dell'atto sessuale/nuziale, visto dal poeta con un senso di esclusione e turbamento.",
-                        side: "left"
-                    },
-                    {
-                        text: "È l'alba: si chiudono i petali\nun poco gualciti; si cova,\ndentro l'urna molle e segreta,\nnon so che felicità nuova.",
-                        explanation: "L'alba segna la fine del rito. I petali 'gualciti' alludono alla perdita della verginità. L'urna (l'ovario del fiore) custodisce il segreto della nuova vita (il concepimento).",
-                        side: "right"
-                    }
-                ],
-                init() {
-                    lucide.createIcons();
-                    if (typeof AOS !== 'undefined') {
-                        AOS.init({
-                            duration: 1000,
-                            once: true,
-                            offset: 100
-                        });
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Alpine.js (Caricato dopo la definizione delle funzioni) -->
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        serif: ['Cormorant Garamond', 'serif'],
-                        display: ['Playfair Display', 'serif'],
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        display: ['"Playfair Display"', 'serif'],
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
@@ -125,7 +40,7 @@
             }
         }
     </script>
-
+    
     <style>
         :root {
             --sage: #7D8C71;
@@ -135,104 +50,107 @@
             --moss: #3E4C33;
         }
 
+        /* Nasconde il cursore di default sui PC */
+        @media (pointer: fine) {
+            body { cursor: none; }
+            a, button, [role="button"], .cursor-pointer, img { cursor: none; }
+        }
+
         body {
             background-color: var(--cream);
             color: var(--earth);
             font-family: 'Cormorant Garamond', serif;
-            scroll-behavior: smooth;
             overflow-x: hidden;
+            width: 100%;
         }
 
         .font-display { font-family: 'Playfair Display', serif; }
         .font-sans { font-family: 'Inter', sans-serif; }
 
         .glass {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(245, 242, 237, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .text-terracotta { color: var(--terracotta); }
-        .bg-terracotta { background-color: var(--terracotta); }
-        .text-moss { color: var(--moss); }
-        .bg-moss { background-color: var(--moss); }
-        .bg-sage { background-color: var(--sage); }
-        .border-moss { border-color: var(--moss); }
-
-        .timeline-dot:hover {
-            transform: scale(1.2) rotate(5deg);
-            box-shadow: 0 0 20px rgba(125, 140, 113, 0.4);
+            border: 1px solid rgba(62, 76, 51, 0.1);
         }
 
         [x-cloak] { display: none !important; }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--cream);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--moss);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--terracotta);
-        }
-
         pre {
             white-space: pre-wrap;
             word-wrap: break-word;
+            font-family: inherit;
         }
+
+        /* Stili Cursore Personalizzato */
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--terracotta);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease-out, background 0.3s ease;
+            mix-blend-mode: multiply;
+            display: none;
+        }
+
+        @media (pointer: fine) {
+            #custom-cursor { display: block; }
+        }
+
+        #custom-cursor.hovered {
+            transform: scale(4);
+            background: var(--sage);
+            opacity: 0.5;
+        }
+
+        /* Effetto hover immagini */
+        .img-hover-effect {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s ease;
+        }
+        .img-hover-effect:hover {
+            transform: scale(1.03) translateY(-5px);
+            filter: grayscale(0%);
+        }
+
+        /* Adattamento Safari Mobile */
+        * { -webkit-tap-highlight-color: transparent; }
     </style>
 </head>
-<body x-data="pascoliApp()">
+<body x-data="pascoliApp()" class="antialiased">
 
-    <!-- Sfondo decorativo fisso -->
-    <div class="fixed inset-0 pointer-events-none z-0">
-        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#7D8C711a] blur-[120px] rounded-full"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#B36A5E0d] blur-[150px] rounded-full"></div>
-    </div>
+    <!-- Cursore Personalizzato -->
+    <div id="custom-cursor"></div>
 
     <!-- Navigazione -->
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 flex gap-4 md:gap-8 items-center glass rounded-full shadow-xl" data-aos="fade-down">
-        <span class="font-display text-lg md:text-xl font-black text-moss border-r border-[#3E4C3333] pr-4 md:pr-6 mr-1 md:mr-2">Pascoli</span>
-        <div class="flex gap-4 md:gap-6 text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-sans font-bold">
+    <nav class="fixed top-4 left-4 right-4 z-50 px-5 py-3 flex justify-between items-center glass rounded-2xl shadow-xl md:left-1/2 md:right-auto md:-translate-x-1/2 md:w-max md:gap-10">
+        <span class="font-display text-xl font-bold text-moss">Pascoli</span>
+        <div class="flex gap-4 md:gap-8 text-[10px] uppercase tracking-widest font-sans font-bold">
             <a href="#vita" class="hover:text-terracotta transition-colors">Vita</a>
             <a href="#visione" class="hover:text-terracotta transition-colors">Visione</a>
             <a href="#fanciullino" class="hover:text-terracotta transition-colors">Poetica</a>
-            <a href="#poesia" class="hover:text-terracotta transition-colors">Gelsomino</a>
+            <a href="#poesia" class="hover:text-terracotta transition-colors">Opere</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+    <section class="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-6 overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="https://www.lavoce.it/wp-content/uploads/2019/07/Giovanni_Pascoli.jpg" alt="Ritratto di Giovanni Pascoli" class="w-full h-full object-cover opacity-20 grayscale">
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#F5F2ED80] to-[#F5F2ED]"></div>
+            <img src="https://www.lavoce.it/wp-content/uploads/2019/07/Giovanni_Pascoli.jpg" alt="Ritratto Giovanni Pascoli" class="w-full h-full object-cover opacity-20 grayscale img-hover-effect">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cream/50 to-cream"></div>
         </div>
         
-        <div class="z-10 max-w-5xl" data-aos="zoom-out" data-aos-duration="1500">
-            <span class="text-terracotta font-sans font-bold uppercase tracking-[0.5em] mb-6 block text-[10px] md:text-xs">Il poeta del nido e dell'infinito</span>
-            <h1 class="text-6xl md:text-[9rem] mb-8 leading-[0.85] font-black tracking-tighter font-display">
+        <div class="z-10 w-full max-w-5xl" data-aos="fade-up">
+            <span class="text-terracotta font-sans font-bold uppercase tracking-[0.4em] mb-4 block text-[10px] md:text-xs">Poeta del nido e del mistero</span>
+            <h1 class="text-6xl md:text-[9rem] mb-6 font-display font-bold leading-[0.85] tracking-tighter">
                 Giovanni <br>
                 <span class="text-moss italic font-light">Pascoli</span>
             </h1>
-            <p class="text-lg md:text-2xl text-[#4A372899] font-serif italic max-w-2xl mx-auto leading-relaxed">
+            <p class="text-lg md:text-2xl text-earth/60 font-serif italic max-w-2xl mx-auto leading-relaxed">
                 "C'è un fanciullino in ognuno di noi..."
             </p>
-            
-            <div class="mt-12">
-                <a href="#vita" class="inline-flex items-center gap-2 px-8 py-4 bg-moss text-[#F5F2ED] rounded-full hover:bg-terracotta transition-all group font-sans font-bold shadow-lg">
-                    Inizia il viaggio <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-            </div>
-        </div>
-
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#3E4C3380] animate-bounce">
-            <i data-lucide="chevron-down" class="w-8 h-8"></i>
         </div>
     </section>
 
@@ -240,59 +158,45 @@
     <section id="vita" class="py-24 px-6 md:px-12 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         <div class="relative" data-aos="fade-right">
             <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border-8 border-white -rotate-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Giovanni_Pascoli_01.jpg" alt="Giovanni Pascoli seduto" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Giovanni_Pascoli_01.jpg" alt="Giovanni Pascoli seduto" class="w-full h-full object-cover grayscale img-hover-effect">
             </div>
-            <div class="absolute -bottom-6 -right-6 w-24 h-24 md:w-32 md:h-32 bg-terracotta rounded-full flex items-center justify-center text-[#F5F2ED] font-display text-3xl md:text-4xl shadow-lg">
-                1855
-            </div>
+            <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-terracotta rounded-full flex items-center justify-center text-cream font-display text-3xl shadow-lg">1855</div>
         </div>
         
         <div data-aos="fade-left">
-            <div class="flex items-center gap-3 text-terracotta mb-4">
-                <i data-lucide="history" class="w-6 h-6"></i>
-                <span class="font-sans font-bold uppercase tracking-widest text-sm">La Vita</span>
+            <div class="flex items-center gap-3 text-terracotta mb-4 uppercase font-sans font-bold tracking-widest text-sm">
+                <i data-lucide="history" class="w-5 h-5"></i>
+                <span>La Biografia</span>
             </div>
-            <h2 class="text-4xl md:text-5xl mb-8 font-display">Un'esistenza segnata dal lutto</h2>
-            <div class="space-y-6 text-lg text-[#4A3728e6] leading-relaxed">
-                <p>Nato a San Mauro di Romagna, la sua vita fu sconvolta il <strong>10 agosto 1867</strong> dall'assassinio del padre Ruggero, un evento che distrusse per sempre l'idillio familiare.</p>
-                <p>Seguirono anni di povertà e ulteriori lutti, che alimentarono in lui l'ossessione per il <strong>"nido"</strong>: la famiglia come unico rifugio sicuro contro un mondo esterno ostile e violento.</p>
-                <p>Nonostante il dolore, riuscì a eccellere negli studi, laureandosi a Bologna sotto la guida di Giosuè Carducci.</p>
+            <h2 class="text-4xl md:text-6xl mb-8 font-display font-bold">Un'esistenza segnata dal lutto</h2>
+            <div class="space-y-6 text-lg text-earth/80 leading-relaxed">
+                <p>Nato a San Mauro di Romagna, la sua vita fu sconvolta dall'assassinio del padre il <strong>10 agosto 1867</strong>.</p>
+                <p>Questo trauma divise la sua esistenza in un "prima" idilliaco e un "dopo" fatto di lutti e povertà, alimentando l'ossessione per il <strong>nido</strong>.</p>
             </div>
         </div>
     </section>
 
-    <!-- Timeline Section -->
-    <section class="py-32 bg-[#3E4C330d] overflow-hidden">
+    <!-- Timeline -->
+    <section class="py-32 bg-moss/5 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-24" data-aos="fade-up">
-                <span class="font-sans font-bold uppercase tracking-[0.4em] text-[10px] text-moss">Cronologia Esistenziale</span>
-                <h2 class="text-5xl md:text-6xl mt-4 font-display">I frammenti di una vita</h2>
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-4xl md:text-6xl font-display font-bold">Cronologia del Poeta</h2>
             </div>
 
-            <div class="relative min-h-[400px]">
-                <div class="hidden md:block absolute top-24 left-0 w-full h-px bg-[#3E4C331a]"></div>
+            <div class="relative">
+                <div class="hidden md:block absolute top-10 left-0 w-full h-px bg-moss/20"></div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-6 gap-8 md:gap-4 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-6 gap-10 relative z-10">
                     <template x-for="(event, index) in timelineEvents" :key="index">
-                        <div class="flex flex-col items-center" data-aos="fade-up" :data-aos-delay="index * 100">
+                        <div class="flex flex-col items-center md:items-start" data-aos="fade-up" :data-aos-delay="index * 100">
                             <button @click="selectedEvent = (selectedEvent === index ? null : index)" 
-                                    :class="selectedEvent === index ? 'bg-terracotta text-[#F5F2ED] border-terracotta rotate-12 scale-110' : 'bg-white text-moss border-[#3E4C331a]'" 
-                                    class="w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 shadow-xl border-2 timeline-dot relative">
-                                <span class="font-display font-black text-lg md:text-xl" x-text="event.year.slice(-2)"></span>
+                                    :class="selectedEvent === index ? 'bg-terracotta text-cream scale-110' : 'bg-white text-moss border-moss/20'" 
+                                    class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 shadow-xl border-2 cursor-pointer">
+                                <span class="font-display font-bold" x-text="event.year.slice(-2)"></span>
                             </button>
-                            <div class="text-center px-2">
-                                <h4 class="font-display text-lg font-bold mb-1 text-moss" x-text="event.title"></h4>
-                                <span class="text-[9px] font-sans font-black text-terracotta uppercase tracking-widest" x-text="event.year"></span>
-                                
-                                <div x-show="selectedEvent === index" 
-                                     x-cloak
-                                     x-transition:enter="transition ease-out duration-300"
-                                     x-transition:enter-start="opacity-0 translate-y-4"
-                                     x-transition:enter-end="opacity-100 translate-y-0"
-                                     class="mt-6 p-6 bg-white rounded-2xl shadow-2xl border border-[#3E4C330d] text-sm text-[#4A3728cc] leading-relaxed relative z-50 max-w-[250px] mx-auto">
-                                    <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-t border-l border-[#3E4C330d]"></div>
-                                    <span x-text="event.description"></span>
-                                </div>
+                            <div class="text-center md:text-left">
+                                <h4 class="font-display text-lg font-bold text-moss" x-text="event.title"></h4>
+                                <p x-show="selectedEvent === index" x-cloak x-transition class="mt-4 p-4 bg-white rounded-xl shadow-lg text-sm text-earth/70 border border-moss/5 max-w-[200px]" x-text="event.description"></p>
                             </div>
                         </div>
                     </template>
@@ -301,123 +205,66 @@
         </div>
     </section>
 
-    <!-- Visione Section -->
-    <section id="visione" class="py-24 px-6 md:px-12 bg-[#7D8C710d] rounded-[2rem] md:rounded-[3rem] max-w-7xl mx-auto my-24" data-aos="fade-up">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <div class="flex justify-center items-center gap-3 text-moss mb-4">
-                <i data-lucide="eye" class="w-6 h-6"></i>
-                <span class="font-sans font-bold uppercase tracking-widest text-sm">Visione del Mondo</span>
-            </div>
-            <h2 class="text-4xl md:text-5xl mb-6 font-display">Il mistero e l'ignoto</h2>
-            <p class="text-lg md:text-xl text-[#4A3728cc] leading-relaxed">
-                Per Pascoli, la realtà non è spiegabile razionalmente. Sotto la superficie delle cose si cela un <strong>mistero profondo</strong>.
+    <!-- Visione del Mondo -->
+    <section id="visione" class="py-24 px-6 max-w-7xl mx-auto grid md:grid-cols-3 gap-8" data-aos="fade-up">
+        <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-moss/5">
+            <div class="text-terracotta mb-6"><i data-lucide="sparkles" class="w-8 h-8"></i></div>
+            <h3 class="text-2xl font-display font-bold mb-4">Mistero</h3>
+            <p class="text-earth/60 leading-relaxed">La realtà non è razionale; dietro le cose si nasconde un ignoto inquietante.</p>
+        </div>
+        <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-moss/5">
+            <div class="text-terracotta mb-6"><i data-lucide="home" class="w-8 h-8"></i></div>
+            <h3 class="text-2xl font-display font-bold mb-4">Il Nido</h3>
+            <p class="text-earth/60 leading-relaxed">La famiglia come unico baluardo contro la violenza del mondo esterno.</p>
+        </div>
+        <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-moss/5">
+            <div class="text-terracotta mb-6"><i data-lucide="leaf" class="w-8 h-8"></i></div>
+            <h3 class="text-2xl font-display font-bold mb-4">Simboli</h3>
+            <p class="text-earth/60 leading-relaxed">Gli oggetti naturali comunicano verità profonde attraverso analogie.</p>
+        </div>
+    </section>
+
+    <!-- Poetica del Fanciullino -->
+    <section id="fanciullino" class="py-32 bg-earth text-cream relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10" data-aos="zoom-in">
+            <i data-lucide="baby" class="w-12 h-12 text-sage mx-auto mb-8"></i>
+            <h2 class="text-5xl md:text-7xl font-display font-bold mb-10">Il Fanciullino</h2>
+            <blockquote class="text-2xl md:text-3xl font-serif italic opacity-90 leading-relaxed mb-12">
+                "C'è un fanciullino in ognuno di noi... che vede le cose con meraviglia."
+            </blockquote>
+            <p class="max-w-2xl mx-auto text-cream/70 text-lg leading-relaxed">
+                Il poeta è colui che sa ascoltare questa voce infantile, l'unica capace di cogliere l'essenza delle cose senza il filtro della ragione.
             </p>
         </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-white p-8 rounded-3xl shadow-sm border border-[#7D8C711a] hover:-translate-y-2 transition-transform duration-500">
-                <div class="text-terracotta mb-6"><i data-lucide="sparkles" class="w-8 h-8"></i></div>
-                <h3 class="text-2xl mb-4 font-display">Oltre il Visibile</h3>
-                <p class="text-[#4A3728b3] leading-relaxed">La scienza fallisce nel dare risposte ultime. Solo l'intuizione del poeta può squarciare il velo.</p>
-            </div>
-            <div class="bg-white p-8 rounded-3xl shadow-sm border border-[#7D8C711a] hover:-translate-y-2 transition-transform duration-500">
-                <div class="text-terracotta mb-6"><i data-lucide="leaf" class="w-8 h-8"></i></div>
-                <h3 class="text-2xl mb-4 font-display">Simbolismo</h3>
-                <p class="text-[#4A3728b3] leading-relaxed">Le piccole cose diventano simboli di verità universali o proiezioni di traumi interiori.</p>
-            </div>
-            <div class="bg-white p-8 rounded-3xl shadow-sm border border-[#7D8C711a] hover:-translate-y-2 transition-transform duration-500">
-                <div class="text-terracotta mb-6"><i data-lucide="home" class="w-8 h-8"></i></div>
-                <h3 class="text-2xl mb-4 font-display">Il Nido Sacro</h3>
-                <p class="text-[#4A3728b3] leading-relaxed">Il nido è il centro affettivo, unico spazio dove l'ignoto non è minaccioso.</p>
-            </div>
-        </div>
     </section>
 
-    <!-- Fanciullino Section -->
-    <section id="fanciullino" class="relative py-32 bg-[#4A3728] text-[#F5F2ED] overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-sage rounded-full blur-[100px]"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-terracotta rounded-full blur-[100px]"></div>
-        </div>
-        
-        <div class="max-w-5xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-16">
-                <div class="flex justify-center items-center gap-3 text-sage mb-4" data-aos="zoom-in">
-                    <i data-lucide="baby" class="w-8 h-8"></i>
-                    <span class="font-sans font-bold uppercase tracking-widest text-sm">La Poetica</span>
-                </div>
-                <h2 class="text-5xl md:text-6xl mb-8 font-display" data-aos="fade-up">Il Fanciullino</h2>
-                <div class="group cursor-default" data-aos="fade-up">
-                    <p class="text-xl md:text-2xl font-serif italic text-[#F5F2EDcc] max-w-3xl mx-auto bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-sm transition-colors hover:bg-white/10">
-                        "C'è un fanciullino in ognuno di noi, che vede le cose con meraviglia, come se fosse la prima volta."
-                    </p>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-12">
-                <div class="space-y-8" data-aos="fade-right">
-                    <div class="border-l-4 border-terracotta pl-6">
-                        <h4 class="text-2xl mb-2 font-display">Stupore</h4>
-                        <p class="text-[#F5F2EDb3]">Il poeta non inventa, ma scopre. Trova la poesia nelle piccole cose quotidiane.</p>
-                    </div>
-                    <div class="border-l-4 border-sage pl-6">
-                        <h4 class="text-2xl mb-2 font-display">Linguaggio</h4>
-                        <p class="text-[#F5F2EDb3]">Uso di onomatopee, termini precisi e una sintassi frantumata e suggestiva.</p>
-                    </div>
-                </div>
-                <div class="bg-white/5 p-8 rounded-3xl backdrop-blur-sm border border-white/10 flex items-center" data-aos="fade-left">
-                    <p class="text-lg leading-relaxed italic opacity-80">
-                        "Il poeta è colui che sa vedere il grande nel piccolo e il piccolo nel grande."
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gelsomino Section -->
-    <section id="poesia" class="py-32 px-6 max-w-7xl mx-auto">
+    <!-- Gelsomino Notturno -->
+    <section id="poesia" class="py-32 px-6 max-w-6xl mx-auto">
         <div class="text-center mb-24" data-aos="fade-up">
-            <div class="flex justify-center items-center gap-3 text-terracotta mb-4">
-                <i data-lucide="flower-2" class="w-8 h-8"></i>
-                <span class="font-sans font-bold uppercase tracking-widest text-sm">Analisi Poetica</span>
-            </div>
-            <h2 class="text-5xl md:text-6xl mb-6 font-display">Il Gelsomino Notturno</h2>
-            <p class="text-lg md:text-xl text-[#4A3728b3] max-w-2xl mx-auto italic">
-                Clicca sulle strofe per scoprire l'analisi.
-            </p>
+            <h2 class="text-5xl md:text-6xl font-display font-bold mb-6">Il Gelsomino Notturno</h2>
+            <p class="text-earth/50 italic">Analisi strofa per strofa</p>
         </div>
 
-        <div class="relative max-w-5xl mx-auto space-y-12">
+        <div class="space-y-16">
             <template x-for="(stanza, index) in poemStanzas" :key="index">
-                <div class="flex flex-col md:flex-row items-center gap-6 group">
+                <div class="flex flex-col md:flex-row items-center gap-8 group">
                     <div class="hidden md:block w-1/3">
-                        <div x-show="activeStanza === index && stanza.side === 'left'" 
-                             x-cloak
-                             x-transition:enter="transition duration-500"
-                             x-transition:enter-start="opacity-0 -translate-x-4"
-                             class="bg-[#7D8C711a] p-6 rounded-2xl border-l-4 border-sage text-sm italic leading-relaxed">
+                        <div x-show="activeStanza === index && stanza.side === 'left'" x-cloak x-transition class="bg-sage/10 p-6 rounded-2xl border-l-4 border-sage italic text-sm">
                             <span x-text="stanza.explanation"></span>
                         </div>
                     </div>
 
-                    <div class="w-full md:w-1/3 text-center">
+                    <div class="w-full md:w-1/3">
                         <div @click="activeStanza = (activeStanza === index ? null : index)"
-                             :class="activeStanza === index ? 'bg-white shadow-2xl ring-2 ring-terracotta/20 scale-105' : 'hover:bg-white/50'" 
-                             class="p-8 rounded-3xl cursor-pointer transition-all duration-500 border border-transparent">
-                            <pre class="font-serif text-lg md:text-xl leading-relaxed text-earth tracking-tight" x-text="stanza.text"></pre>
+                             :class="activeStanza === index ? 'bg-white shadow-2xl border-terracotta scale-105' : 'bg-white/50 hover:bg-white'"
+                             class="p-10 rounded-[2.5rem] border-2 transition-all cursor-pointer text-center">
+                            <pre class="font-serif text-xl leading-relaxed text-earth tracking-tight" x-text="stanza.text"></pre>
                         </div>
-                    </div>
-
-                    <div class="md:hidden w-full" x-show="activeStanza === index" x-cloak x-transition>
-                        <div class="bg-[#7D8C711a] p-6 rounded-xl text-sm italic border-l-4 border-sage" x-text="stanza.explanation"></div>
+                        <div x-show="activeStanza === index" class="md:hidden mt-4 p-5 bg-sage/10 rounded-2xl text-sm italic border-l-4 border-sage" x-text="stanza.explanation"></div>
                     </div>
 
                     <div class="hidden md:block w-1/3">
-                        <div x-show="activeStanza === index && stanza.side === 'right'" 
-                             x-cloak
-                             x-transition:enter="transition duration-500"
-                             x-transition:enter-start="opacity-0 translate-x-4"
-                             class="bg-[#B36A5E1a] p-6 rounded-2xl border-r-4 border-terracotta text-sm italic leading-relaxed text-right">
+                        <div x-show="activeStanza === index && stanza.side === 'right'" x-cloak x-transition class="bg-terracotta/10 p-6 rounded-2xl border-r-4 border-terracotta italic text-sm text-right">
                             <span x-text="stanza.explanation"></span>
                         </div>
                     </div>
@@ -427,15 +274,65 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-moss text-[#F5F2ED] py-24 px-6 text-center">
-        <div class="max-w-4xl mx-auto">
-            <div class="mb-12 inline-block">
-                <i data-lucide="feather" class="w-12 h-12 text-terracotta mx-auto"></i>
-            </div>
-            <h2 class="text-3xl md:text-4xl mb-8 font-display italic">"Il mondo è piccolo per chi lo guarda con amore."</h2>
-            <!-- Testo aggiornato come richiesto -->
-            <p class="font-sans text-[10px] uppercase tracking-[0.5em] opacity-40 italic">di gabbb.studios</p>
-        </div>
+    <footer class="py-24 bg-moss text-cream text-center px-6">
+        <i data-lucide="feather" class="w-10 h-10 mx-auto mb-8 text-terracotta"></i>
+        <h2 class="text-3xl font-display italic mb-12">"Il mondo è piccolo per chi lo guarda con amore."</h2>
+        <p class="text-[10px] tracking-[0.5em] uppercase opacity-40 italic">di gabbb.studios</p>
     </footer>
+
+    <script>
+        function pascoliApp() {
+            return {
+                activeStanza: null,
+                selectedEvent: null,
+                timelineEvents: [
+                    { year: "1855", title: "Nascita", description: "Nasce a San Mauro di Romagna." },
+                    { year: "1867", title: "Il Delitto", description: "Uccisione del padre Ruggero il 10 agosto." },
+                    { year: "1873", title: "Bologna", description: "Studia all'Università con Carducci." },
+                    { year: "1891", title: "Myricae", description: "Pubblica la sua raccolta più celebre." },
+                    { year: "1897", title: "Poetica", description: "Esce il saggio 'Il Fanciullino'." },
+                    { year: "1912", title: "Morte", description: "Si spegne a Bologna il 6 aprile." }
+                ],
+                poemStanzas: [
+                    { text: "E s'aprono i fiori notturni,\nnell'ora che penso a' miei cari.\nSono apparse in mezzo ai viburni\nle farfalle crepuscolari.", explanation: "I fiori si aprono mentre il poeta ricorda i suoi morti: un legame tra natura e aldilà.", side: "left" },
+                    { text: "Da un pezzo si tacquero i gridi:\nlà sola una casa bisbiglia.\nSotto l'ali dormono i nidi,\ncome gli occhi sotto le ciglia.", explanation: "Similitudine tra i nidi e gli occhi umani, suggerendo protezione e intimità.", side: "right" },
+                    { text: "Dai calici aperti si esala\nl'odore di fragole rosse.\nSplende un lume là nella sala.\nNasce l'erba sopra le fosse.", explanation: "L'odore di fragole (erotismo) si scontra con l'erba sulle fosse (morte).", side: "left" },
+                    { text: "Un'ape tardiva sussurra\ntrovando già prese le celle.\nLa Chioccetta per l'aia azzurra\nva col suo pigolio di stelle.", explanation: "L'ape esclusa è il poeta; le stelle sono pulcini in un'aia celeste.", side: "right" },
+                    { text: "Per tutta la notte s'esala\nl'odore che passa col vento.\nPassa il lume su per la scala;\nbrilla al primo piano: s'è spento...", explanation: "Il lume che sale indica l'unione nuziale, vista dal poeta con esclusione.", side: "left" },
+                    { text: "È l'alba: si chiudono i petali\nun poco gualciti; si cova,\ndentro l'urna molle e segreta,\nnon so che felicità nuova.", explanation: "L'alba porta la fecondazione: una nuova vita nasce nel segreto del fiore.", side: "right" }
+                ],
+                init() {
+                    lucide.createIcons();
+                    AOS.init({ duration: 1000, once: true });
+                    this.setupCursor();
+                },
+                setupCursor() {
+                    const cursor = document.getElementById('custom-cursor');
+                    if (!cursor) return;
+
+                    document.addEventListener('mousemove', (e) => {
+                        cursor.style.left = e.clientX + 'px';
+                        cursor.style.top = e.clientY + 'px';
+                    });
+
+                    // Funzione per aggiornare i listener (utile se il DOM cambia)
+                    const refreshCursorListeners = () => {
+                        const interactiveElements = document.querySelectorAll('a, button, .cursor-pointer, img, .timeline-dot');
+                        interactiveElements.forEach(el => {
+                            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+                        });
+                    };
+
+                    refreshCursorListeners();
+                    
+                    // Listener extra per elementi dinamici di Alpine
+                    document.addEventListener('click', () => {
+                        setTimeout(refreshCursorListeners, 100);
+                    });
+                }
+            }
+        }
+    </script>
 </body>
 </html>
