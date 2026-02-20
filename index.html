@@ -49,6 +49,7 @@
                 { year: "1873", title: "Bologna", description: "Inizia l'università. Diventa allievo prediletto di Giosuè Carducci." },
                 { year: "1891", title: "Myricae", description: "Pubblica la raccolta dedicata alle 'piccole cose' e alla natura romagnola." },
                 { year: "1897", title: "Il Fanciullino", description: "Saggio manifesto: la poesia è lo sguardo puro e ingenuo di un bambino." },
+                { year: "1911", title: "La Politica", description: "Discorso 'La grande Proletaria si è mossa' a favore della guerra in Libia." },
                 { year: "1912", title: "L'Addio", description: "Muore a Bologna. Viene sepolto nella casa-museo di Castelvecchio." }
             ],
             poemStanzas: [
@@ -85,7 +86,6 @@
         .glass { background: rgba(245, 242, 237, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(62, 76, 51, 0.1); }
         #custom-cursor { width: 20px; height: 20px; background: var(--terracotta); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.15s ease-out; mix-blend-mode: multiply; display: none; }
         .img-container { overflow: hidden; border-radius: 1.5rem; transition: all 0.5s ease; }
-        .img-container:hover { transform: translateY(-10px); }
         pre { white-space: pre-wrap; word-wrap: break-word; font-family: inherit; }
         @media (pointer: fine) { body { cursor: none; } a, button, .clickable { cursor: none; } }
     </style>
@@ -98,11 +98,13 @@
         <span class="font-serif text-xl font-bold text-moss tracking-tight">G. Pascoli</span>
         <div class="flex gap-6 text-[10px] uppercase tracking-widest font-sans font-bold">
             <a href="#vita" class="hover:text-terracotta transition-colors clickable">Vita</a>
+            <a href="#politica" class="hover:text-terracotta transition-colors clickable">Politica</a>
             <a href="#poetica" class="hover:text-terracotta transition-colors clickable">Poetica</a>
             <a href="#opere" class="hover:text-terracotta transition-colors clickable">Opere</a>
         </div>
     </nav>
 
+    <!-- HERO SECTION -->
     <section class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
         <div class="absolute inset-0 z-0">
             <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Giovanni_Pascoli_01.jpg" alt="[Ritratto di Pascoli]" class="w-full h-full object-cover opacity-10 grayscale">
@@ -119,6 +121,7 @@
         </div>
     </section>
 
+    <!-- SEZIONE VITA -->
     <section id="vita" class="py-24 px-6 max-w-6xl mx-auto">
         <div class="grid md:grid-cols-2 gap-16 items-center">
             <div data-aos="fade-right">
@@ -135,13 +138,60 @@
                 <p class="text-lg md:text-xl text-earth/80 leading-relaxed font-serif mb-8">
                     L'uccisione impunita del padre Ruggero (1867) non fu solo un lutto, ma la fine di un mondo. Tutta la sua produzione poetica diventa un disperato tentativo di ricostruire quel guscio protettivo, quel <strong>nido</strong>, contro il male del mondo esterno.
                 </p>
-                <div class="p-8 bg-white/50 rounded-3xl border border-moss/10 shadow-inner italic text-moss font-serif text-lg">
-                    "O cavalla storna, che portavi colui che non ritorna..."
+            </div>
+        </div>
+    </section>
+
+    <!-- LINEA DEL TEMPO (REINTRODOTTA) -->
+    <section class="py-24 bg-moss/5 overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-serif font-bold text-center mb-16" data-aos="fade-up">Le tappe della sua esistenza</h2>
+            <div class="relative">
+                <div class="absolute top-1/2 left-0 w-full h-0.5 bg-moss/20 -translate-y-1/2 hidden md:block"></div>
+                <div class="grid grid-cols-2 md:grid-cols-7 gap-8 relative z-10">
+                    <template x-for="(event, index) in timelineEvents" :key="index">
+                        <div class="flex flex-col items-center" data-aos="zoom-in" :data-aos-delay="index * 100">
+                            <button @click="selectedEvent = (selectedEvent === index ? null : index)" 
+                                    :class="selectedEvent === index ? 'bg-terracotta text-white scale-125' : 'bg-white text-moss'" 
+                                    class="w-16 h-16 rounded-full shadow-lg flex items-center justify-center font-bold mb-4 border-2 border-moss/10 transition-all clickable">
+                                <span class="text-sm" x-text="event.year"></span>
+                            </button>
+                            <p class="font-serif font-bold text-xs text-center" x-text="event.title"></p>
+                            
+                            <div x-show="selectedEvent === index" x-cloak x-transition 
+                                 class="mt-4 p-4 bg-white rounded-xl shadow-2xl text-xs text-earth/70 absolute top-20 w-48 z-50 text-center border border-moss/10">
+                                <p x-text="event.description"></p>
+                            </div>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- SEZIONE POLITICA (REINTRODOTTA E AMPLIATA) -->
+    <section id="politica" class="py-24 px-6 max-w-6xl mx-auto border-y border-moss/10">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-6xl font-serif font-bold">Il Socialismo Umanitario</h2>
+            <p class="text-terracotta font-serif italic mt-4">Dalla militanza anarchica al nazionalismo</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-12">
+            <div class="bg-white p-8 rounded-3xl shadow-sm" data-aos="fade-right">
+                <h3 class="text-2xl font-serif font-bold mb-4 text-moss">Il Socialismo della Bontà</h3>
+                <p class="font-serif text-earth/80 leading-relaxed">
+                    Dopo un'iniziale adesione al socialismo internazionalista e l'arresto nel 1879, Pascoli elabora una visione utopica: il socialismo non come lotta di classe, ma come fratellanza universale per alleviare il dolore dei poveri.
+                </p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-sm" data-aos="fade-left">
+                <h3 class="text-2xl font-serif font-bold mb-4 text-moss">"La Grande Proletaria"</h3>
+                <p class="font-serif text-earth/80 leading-relaxed">
+                    Nel 1911 sostiene l'impresa coloniale in Libia. Per Pascoli, l'Italia è una nazione "proletaria" che ha il diritto di trovare terra per i suoi figli emigrati, affinché non debbano più servire gli stranieri.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEZIONE POETICA -->
     <section id="poetica" class="py-24 bg-moss/5">
         <div class="max-w-6xl mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-6xl font-serif font-bold mb-16">La Visione Poetica</h2>
@@ -171,6 +221,7 @@
         </div>
     </section>
 
+    <!-- SEZIONE OPERE -->
     <section id="opere" class="py-24 px-6 max-w-4xl mx-auto">
         <div class="text-center mb-20" data-aos="fade-up">
             <h2 class="text-4xl md:text-7xl font-serif font-bold mb-6">Analisi Poetica</h2>
